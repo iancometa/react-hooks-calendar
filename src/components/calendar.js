@@ -1,11 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 import getDaysMonth from './getDaysMonth';
 import { days } from './daysMonthArray';
 import { GridContainer, GridItem } from './styledComponents';
+import CalendarDaysOfWeek from './calendarDaysofWeek';
+import CalendarHeader from './calendarHeader';
+import { ArrowDiv } from './styledComponents';
 
-const Calendar = ({currDate}) => {
+const Calendar = () => {
 
-    const dates = getDaysMonth(currDate.currYear, currDate.currMonth + 1);
+    const d = new Date();
+
+    const [currMonth, setMonth] = useState(d.getMonth());
+    const [currYear, setYear] = useState(d.getFullYear());
+
+    const handleArrowClick = (val) => {
+        if (val === 'next') {
+          if (currMonth === 11) {
+            setYear(currYear + 1);
+            setMonth(0);
+          } else {
+            setMonth(currMonth + 1);
+          }
+        } else {
+          if (currMonth === 0) {
+            setYear(currYear - 1);
+            setMonth(11);
+          } else {
+            setMonth(currMonth - 1);
+          }
+        }
+    
+    }
+
+    const dates = getDaysMonth(currYear, currMonth + 1);
 
     let calendarTable = [];
     let count = 0;
@@ -23,10 +50,10 @@ const Calendar = ({currDate}) => {
                 if (days[dy] === day[1]) {
                     const d = new Date();
                     const cYear = d.getFullYear();
-                    const currMonth = d.getMonth();
+                    const cMonth = d.getMonth();
                     const cDay = d.getDate();
                     const currday = parseInt(day[0]);
-                    (currday === cDay && currMonth === currDate.currMonth && cYear === currDate.currYear ? cells.push(<GridItem selected key={row + dy}>{day[0]}</GridItem>) : cells.push(<GridItem key={row + dy}>{day[0]}</GridItem>));    
+                    (currday === cDay && cMonth === currMonth && cYear === currYear ? cells.push(<GridItem selected key={row + dy}>{day[0]}</GridItem>) : cells.push(<GridItem key={row + dy}>{day[0]}</GridItem>));    
                     count++;
                 } else {
                     cells.push(<GridItem blank key={row + dy}></GridItem>);
@@ -39,8 +66,17 @@ const Calendar = ({currDate}) => {
 
     }
 
+    const currDate = {
+        currYear: currYear,
+        currMonth: currMonth
+    }
+
     return (
         <div>
+            <ArrowDiv left onClick={() => handleArrowClick('prev')}></ArrowDiv>
+            <ArrowDiv onClick={() => handleArrowClick('next')}></ArrowDiv>
+            <CalendarHeader currDate={currDate} />
+            <CalendarDaysOfWeek />
             {calendarTable}
         </div>
     );

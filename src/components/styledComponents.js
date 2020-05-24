@@ -3,6 +3,7 @@ import styled from 'styled-components'
 export const HeaderDiv = styled.div`
 padding: 1rem;
 font-size: 2rem;
+text-align: center;
 `;
 
 export const GridContainer = styled.div`

@@ -1,5 +1,6 @@
 {
   "name": "react-hooks-calendar",
+  "homepage": "https://iancometa.github.io/react-hooks-calendar/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

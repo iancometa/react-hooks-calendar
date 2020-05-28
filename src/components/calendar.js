@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import getDaysMonth from './getDaysMonth';
 import { days } from './daysMonthArray';
-import { GridContainer, GridItem } from './styledComponents';
+import { ArrowDiv, GridContainer, GridItem, Wrapper } from './styledComponents';
 import CalendarDaysOfWeek from './calendarDaysofWeek';
 import CalendarHeader from './calendarHeader';
-import { ArrowDiv } from './styledComponents';
 
 const Calendar = () => {
 
@@ -72,13 +71,13 @@ const Calendar = () => {
     }
 
     return (
-        <div>
+        <Wrapper>
             <ArrowDiv left onClick={() => handleArrowClick('prev')}></ArrowDiv>
             <ArrowDiv onClick={() => handleArrowClick('next')}></ArrowDiv>
             <CalendarHeader currDate={currDate} />
             <CalendarDaysOfWeek />
             {calendarTable}
-        </div>
+        </Wrapper>
     );
 
 }

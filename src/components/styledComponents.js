@@ -1,5 +1,13 @@
 import styled from 'styled-components'
 
+export const H4 = styled.h4 `
+text-align: center;
+`;
+
+export const Wrapper = styled.div `
+position: relative;
+`;
+
 export const HeaderDiv = styled.div`
 padding: 1rem;
 font-size: 2rem;
